@@ -1,11 +1,11 @@
 {
-    "name": "tec_app",
-    "short_name": "tec_app",
+    "name": "TEC26",
+    "short_name": "TEC26",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Technology Education Career 2026.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
