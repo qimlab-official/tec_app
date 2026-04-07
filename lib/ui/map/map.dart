@@ -321,7 +321,7 @@ class FloorMapPainter extends CustomPainter {
 
   void _drawGrid(Canvas canvas, Size size) {
     final gridPaint = Paint()
-      ..color = const Color(0xFFE2E8F0).withOpacity(0.4)
+      ..color = const Color(0xFFE2E8F0).withValues(alpha: 0.4)
       ..strokeWidth = 0.5;
 
     for (double x = 20; x < size.width; x += 30) {
@@ -393,13 +393,13 @@ class FloorMapPainter extends CustomPainter {
           selectedCategory != null && booth.category != selectedCategory;
 
       final boothColor = isDimmed
-          ? booth.category.color.withOpacity(0.15)
+          ? booth.category.color.withValues(alpha: 0.15)
           : booth.category.color;
 
       // Shadow
       if (isHighlighted) {
         final shadowPaint = Paint()
-          ..color = boothColor.withOpacity(0.3)
+          ..color = boothColor.withValues(alpha: 0.3)
           ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8);
         canvas.drawRRect(
           RRect.fromRectAndRadius(
@@ -413,8 +413,8 @@ class FloorMapPainter extends CustomPainter {
       // Booth fill
       final fillPaint = Paint()
         ..color = isDimmed
-            ? boothColor.withOpacity(0.08)
-            : boothColor.withOpacity(isHighlighted ? 0.25 : 0.15);
+            ? boothColor.withValues(alpha: 0.08)
+            : boothColor.withValues(alpha: isHighlighted ? 0.25 : 0.15);
       canvas.drawRRect(
         RRect.fromRectAndRadius(booth.rect, const Radius.circular(10)),
         fillPaint,
@@ -422,7 +422,7 @@ class FloorMapPainter extends CustomPainter {
 
       // Booth border
       final borderPaint = Paint()
-        ..color = isDimmed ? boothColor.withOpacity(0.3) : boothColor
+        ..color = isDimmed ? boothColor.withValues(alpha: 0.3) : boothColor
         ..style = PaintingStyle.stroke
         ..strokeWidth = isHighlighted ? 2.5 : 1.5;
       canvas.drawRRect(
@@ -435,7 +435,7 @@ class FloorMapPainter extends CustomPainter {
         text: TextSpan(
           text: booth.id,
           style: TextStyle(
-            color: isDimmed ? boothColor.withOpacity(0.4) : boothColor,
+            color: isDimmed ? boothColor.withValues(alpha: 0.4) : boothColor,
             fontSize: 11,
             fontWeight: FontWeight.w800,
             letterSpacing: 0.5,
@@ -455,7 +455,7 @@ class FloorMapPainter extends CustomPainter {
           text: companyName,
           style: TextStyle(
             color: isDimmed
-                ? const Color(0xFF64748B).withOpacity(0.3)
+                ? const Color(0xFF64748B).withValues(alpha: 0.3)
                 : const Color(0xFF334155),
             fontSize: 9,
             fontWeight: FontWeight.w600,
@@ -473,8 +473,8 @@ class FloorMapPainter extends CustomPainter {
       // Category icon background
       final iconBgPaint = Paint()
         ..color = isDimmed
-            ? boothColor.withOpacity(0.1)
-            : boothColor.withOpacity(0.2);
+            ? boothColor.withValues(alpha: 0.1)
+            : boothColor.withValues(alpha: 0.2);
       canvas.drawCircle(
         Offset(booth.rect.right - 18, booth.rect.bottom - 18),
         12,
@@ -835,13 +835,15 @@ class _MapPageState extends State<MapPage> {
                       },
                       elevation: 0,
                       selectedColor: category.color,
-                      backgroundColor: category.color.withOpacity(0.08),
+                      backgroundColor: category.color.withValues(alpha: 0.08),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                       ),
                       side: isSelected
                           ? BorderSide.none
-                          : BorderSide(color: category.color.withOpacity(0.3)),
+                          : BorderSide(
+                              color: category.color.withValues(alpha: 0.3),
+                            ),
                       showCheckmark: false,
                       labelStyle: TextStyle(
                         color: isSelected ? Colors.white : category.color,
@@ -899,7 +901,7 @@ class _MapPageState extends State<MapPage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.04),
+                        color: Colors.black.withValues(alpha: 0.04),
                         blurRadius: 20,
                         offset: const Offset(0, 4),
                       ),
@@ -1019,15 +1021,15 @@ class _BoothDetailSheet extends StatelessWidget {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        booth.category.color.withOpacity(0.08),
-                        booth.category.color.withOpacity(0.02),
+                        booth.category.color.withValues(alpha: 0.08),
+                        booth.category.color.withValues(alpha: 0.02),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: booth.category.color.withOpacity(0.15),
+                      color: booth.category.color.withValues(alpha: 0.15),
                     ),
                   ),
                   child: Row(
@@ -1037,7 +1039,7 @@ class _BoothDetailSheet extends StatelessWidget {
                         width: 56,
                         height: 56,
                         decoration: BoxDecoration(
-                          color: booth.category.color.withOpacity(0.15),
+                          color: booth.category.color.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Center(
@@ -1160,10 +1162,12 @@ class _BoothDetailSheet extends StatelessWidget {
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(
-                            color: booth.category.color.withOpacity(0.08),
+                            color: booth.category.color.withValues(alpha: 0.08),
                             borderRadius: BorderRadius.circular(50),
                             border: Border.all(
-                              color: booth.category.color.withOpacity(0.2),
+                              color: booth.category.color.withValues(
+                                alpha: 0.2,
+                              ),
                             ),
                           ),
                           child: Text(
