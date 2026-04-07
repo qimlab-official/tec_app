@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../ui/exhibitor.dart';
 import '../ui/home.dart';
-import '../ui/map.dart';
+import '../ui/map/map.dart';
 import '../ui/more.dart';
 import '../ui/schedule.dart';
 
@@ -36,6 +36,13 @@ class _NavigatorServicesState extends State<NavigatorServices> {
             child: IconButton(
               onPressed: () {},
               icon: const Icon(Icons.notifications),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsetsGeometry.only(right: 10),
+            child: IconButton.outlined(
+              onPressed: () {},
+              icon: const Icon(Icons.light_mode_outlined),
             ),
           ),
         ],
