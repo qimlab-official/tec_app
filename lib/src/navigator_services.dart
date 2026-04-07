@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../ui/exhibitor.dart';
-import '../ui/home.dart';
-import '../ui/map/map.dart';
-import '../ui/more.dart';
+import '../ui/home/home_nav.dart';
 import '../ui/notification/notification.dart';
-import '../ui/schedule.dart';
+import '../ui/about_us/about_us.dart';
+import '../ui/throwback/throwback.dart';
+import '../ui/career_dev_series/career.dart';
+import '../ui/faqs/faqs.dart';
 
 class NavigatorServices extends StatefulWidget {
   const NavigatorServices({super.key, required this.title});
@@ -17,15 +16,15 @@ class NavigatorServices extends StatefulWidget {
 }
 
 class _NavigatorServicesState extends State<NavigatorServices> {
-  int _selectedIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    const HomePage(title: 'Home'),
-    const MapPage(title: 'Map'),
-    const ExhibitorPage(title: 'Exhibitor'),
-    const SchedulePage(title: 'Schedule'),
-    const MorePage(title: 'More'),
+    const HomeNavPage(),
+    const AboutUsPage(),
+    const ThrowbackPage(),
+    const CareerPage(),
+    const FaqsPage(),
   ];
 
   @override
@@ -34,34 +33,29 @@ class _NavigatorServicesState extends State<NavigatorServices> {
       key: _scaffoldKey,
       drawer: Drawer(
         child: NavigationDrawer(
+          selectedIndex: _selectedIndex,
           indicatorShape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
           onDestinationSelected: (int index) {
-            setState(() {});
+            setState(() {
+              _selectedIndex = index;
+            });
+            Navigator.pop(context);
           },
           children: [
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: Container(
-                color: Colors.blue,
+                color: Colors.white,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: Icon(Icons.person, color: Colors.blueAccent),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'TEC 2026',
-                        style: GoogleFonts.plusJakartaSans(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Image.asset(
+                        'assets/image/logo/tec_logo_appbar.webp',
+                        height: 80,
                       ),
                     ],
                   ),
@@ -98,6 +92,8 @@ class _NavigatorServicesState extends State<NavigatorServices> {
         ),
       ),
       appBar: AppBar(
+        shadowColor: Colors.black,
+        scrolledUnderElevation: 0,
         actions: [
           Padding(
             padding: EdgeInsetsGeometry.only(right: 10),
@@ -113,13 +109,13 @@ class _NavigatorServicesState extends State<NavigatorServices> {
               icon: const Icon(Icons.notifications),
             ),
           ),
-          //Padding(
-          //  padding: EdgeInsetsGeometry.only(right: 10),
-          //  child: IconButton.outlined(
-          //    onPressed: () {},
-          //   icon: const Icon(Icons.light_mode_outlined),
-          // ),
-          // ),
+          Padding(
+            padding: EdgeInsetsGeometry.only(right: 10),
+            child: IconButton.outlined(
+              onPressed: () {},
+              icon: const Icon(Icons.light_mode_outlined),
+            ),
+          ),
         ],
         leading: IconButton(
           onPressed: () {
@@ -127,41 +123,12 @@ class _NavigatorServicesState extends State<NavigatorServices> {
           },
           icon: const Icon(Icons.menu),
         ),
-        title: Text(
-          widget.title,
-          style: GoogleFonts.plusJakartaSans(
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
-          ),
+        title: Image.asset(
+          'assets/image/logo/tec_logo_appbar.webp',
+          height: 50,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
       body: _pages[_selectedIndex],
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: (int index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        destinations: const <NavigationDestination>[
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.map_rounded), label: 'Map'),
-          NavigationDestination(icon: Icon(Icons.business), label: 'Exhibitor'),
-          NavigationDestination(
-            icon: Icon(Icons.schedule_rounded),
-            label: 'Schedule',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.more_horiz_rounded),
-            label: 'More',
-          ),
-        ],
-      ),
     );
   }
 }
