@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../main.dart';
 import '../ui/home/home_nav.dart';
 import '../ui/notification/notification.dart';
 import '../ui/about_us/about_us.dart';
@@ -7,9 +8,7 @@ import '../ui/career_dev_series/career.dart';
 import '../ui/faqs/faqs.dart';
 
 class NavigatorServices extends StatefulWidget {
-  const NavigatorServices({super.key, required this.title});
-
-  final String title;
+  const NavigatorServices({super.key});
 
   @override
   State<NavigatorServices> createState() => _NavigatorServicesState();
@@ -47,9 +46,9 @@ class _NavigatorServicesState extends State<NavigatorServices> {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: Container(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surfaceContainerLowest,
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
+                  padding: EdgeInsets.fromLTRB(20, 20, 0, 15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -96,7 +95,7 @@ class _NavigatorServicesState extends State<NavigatorServices> {
         scrolledUnderElevation: 0,
         actions: [
           Padding(
-            padding: EdgeInsetsGeometry.only(right: 10),
+            padding: EdgeInsetsGeometry.only(right: 5),
             child: IconButton(
               onPressed: () {
                 Navigator.push(
@@ -110,10 +109,32 @@ class _NavigatorServicesState extends State<NavigatorServices> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsGeometry.only(right: 10),
-            child: IconButton.outlined(
-              onPressed: () {},
-              icon: const Icon(Icons.light_mode_outlined),
+            padding: const EdgeInsets.only(right: 10),
+            //theme button
+            child: ValueListenableBuilder<ThemeMode>(
+              valueListenable: themeNotifier,
+              builder: (_, ThemeMode currentMode, _) {
+                IconData iconData;
+                if (currentMode == ThemeMode.light) {
+                  iconData = Icons.light_mode_outlined;
+                } else if (currentMode == ThemeMode.dark) {
+                  iconData = Icons.dark_mode_outlined;
+                } else {
+                  iconData = Icons.brightness_auto_outlined;
+                }
+                return IconButton.outlined(
+                  onPressed: () {
+                    if (currentMode == ThemeMode.system) {
+                      themeNotifier.value = ThemeMode.light;
+                    } else if (currentMode == ThemeMode.light) {
+                      themeNotifier.value = ThemeMode.dark;
+                    } else {
+                      themeNotifier.value = ThemeMode.system;
+                    }
+                  },
+                  icon: Icon(iconData),
+                );
+              },
             ),
           ),
         ],

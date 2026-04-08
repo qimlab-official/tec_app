@@ -110,13 +110,12 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F8F9),
       body: SafeArea(
         child: Column(
           children: [
             // Header
             Padding(
-              padding: const EdgeInsets.fromLTRB(25, 20, 25, 10),
+              padding: const EdgeInsets.fromLTRB(25, 15, 0, 0),
               child: Row(
                 children: [
                   RichText(
@@ -127,7 +126,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                           style: GoogleFonts.plusJakartaSans(
                             fontWeight: FontWeight.w800,
                             fontSize: 36,
-                            color: const Color(0xFF1A1A1A),
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                         TextSpan(
@@ -147,24 +146,33 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
 
             // Search Bar
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(30),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: SearchBar(
+                backgroundColor: WidgetStatePropertyAll(
+                  Theme.of(context).colorScheme.surfaceContainerLow,
                 ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search companies, roles, or industries...',
-                    hintStyle: GoogleFonts.plusJakartaSans(
-                      color: Colors.grey[600],
-                      fontSize: 14,
-                    ),
-                    prefixIcon: Icon(Icons.search, color: Colors.grey[600]),
-                    border: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 15),
+                // controller: _searchController,
+                shape: WidgetStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
                   ),
                 ),
+                hintText: 'Search booth, company, or tag...',
+                hintStyle: WidgetStatePropertyAll(
+                  GoogleFonts.plusJakartaSans(
+                    // color: const Color(0xFF94A3B8),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                  ),
+                ),
+                leading: Icon(Icons.search),
+
+                elevation: const WidgetStatePropertyAll(0),
+                onChanged: (value) {
+                  setState(() {
+                    //_searchQuery = value;
+                  });
+                },
               ),
             ),
 
@@ -180,7 +188,14 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                     return Padding(
                       padding: const EdgeInsets.only(right: 12.0),
                       child: ChoiceChip(
-                        label: Text(category),
+                        label: Text(
+                          category,
+                          style: TextStyle(
+                            color: isSelected
+                                ? Colors.white
+                                : Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
                         selected: isSelected,
                         onSelected: (bool selected) {
                           setState(() {
@@ -189,7 +204,9 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                         },
                         elevation: 0,
                         selectedColor: const Color(0xFF4A80F0),
-                        backgroundColor: const Color(0xFFE0E0E0),
+                        backgroundColor: Theme.of(
+                          context,
+                        ).colorScheme.surfaceContainerHigh,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -228,7 +245,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                     margin: const EdgeInsets.only(bottom: 20),
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surfaceContainerLow,
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
@@ -248,7 +265,9 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                               width: 60,
                               height: 60,
                               decoration: BoxDecoration(
-                                color: exhibitor.color ?? Colors.grey[100],
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.primaryContainer,
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: ClipRRect(
@@ -259,7 +278,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                                   errorBuilder: (context, error, stackTrace) =>
                                       const Icon(
                                         Icons.business,
-                                        color: Colors.grey,
+                                        //color: Colors.grey,
                                       ),
                                 ),
                               ),
@@ -277,7 +296,9 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                                         style: GoogleFonts.plusJakartaSans(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 18,
-                                          color: const Color(0xFF1A1A1A),
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onSurface,
                                         ),
                                       ),
                                       if (exhibitor.isHiring) ...[
@@ -330,7 +351,9 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                                 Icon(
                                   Icons.location_on,
                                   size: 16,
-                                  color: const Color(0xFF1643AB),
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
@@ -338,7 +361,9 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                                   style: GoogleFonts.plusJakartaSans(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w700,
-                                    color: const Color(0xFF1643AB),
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onSurface,
                                   ),
                                 ),
                               ],

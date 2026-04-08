@@ -15,7 +15,7 @@ class _NotificationPageState extends State<NotificationPage> {
       body: Center(
         child: Column(
           mainAxisAlignment: .center,
-          children: [const Text('Notification Page')],
+          children: [const Text('NO NOTIFICATION')],
         ),
       ),
     );

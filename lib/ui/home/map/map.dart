@@ -673,59 +673,12 @@ class _MapPageState extends State<MapPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Title
-          Padding(
-            padding: const EdgeInsets.fromLTRB(30, 20, 0, 0),
-            child: Row(
-              children: [
-                Text(
-                  'Floor',
-                  style: GoogleFonts.plusJakartaSans(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 45,
-                    color: const Color.fromARGB(255, 46, 46, 46),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  'Map',
-                  style: GoogleFonts.plusJakartaSans(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 45,
-                    color: const Color.fromARGB(255, 22, 67, 171),
-                  ),
-                ),
-                Text(
-                  '.',
-                  style: GoogleFonts.plusJakartaSans(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 45,
-                    color: const Color.fromARGB(255, 22, 67, 171),
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Subtitle
-          Padding(
-            padding: const EdgeInsets.fromLTRB(30, 4, 30, 0),
-            child: Text(
-              'Explore booths and discover opportunities across the venue.',
-              style: GoogleFonts.plusJakartaSans(
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                color: const Color(0xFF64748B),
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 16),
-
-          // Search bar
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SearchBar(
+              backgroundColor: WidgetStatePropertyAll(
+                Theme.of(context).colorScheme.surfaceContainerLow,
+              ),
               controller: _searchController,
               shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
@@ -733,15 +686,12 @@ class _MapPageState extends State<MapPage> {
               hintText: 'Search booth, company, or tag...',
               hintStyle: WidgetStatePropertyAll(
                 GoogleFonts.plusJakartaSans(
-                  color: const Color(0xFF94A3B8),
+                  // color: const Color(0xFF94A3B8),
                   fontWeight: FontWeight.w500,
                   fontSize: 14,
                 ),
               ),
-              leading: const Padding(
-                padding: EdgeInsets.only(left: 8),
-                child: Icon(Icons.search, color: Color(0xFF94A3B8)),
-              ),
+              leading: Icon(Icons.search),
               trailing: _searchQuery.isNotEmpty
                   ? [
                       IconButton(

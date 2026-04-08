@@ -145,19 +145,9 @@ class _SchedulePageState extends State<SchedulePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            event.time,
-            style: GoogleFonts.plusJakartaSans(
-              color: const Color(0xFF4A6899),
-              fontWeight: FontWeight.w800,
-              fontSize: 11,
-              letterSpacing: 1.0,
-            ),
-          ),
-          const SizedBox(height: 12),
           Container(
             decoration: BoxDecoration(
-              color: event.isPrimary ? Colors.white : const Color(0xFFF3F4F6),
+              color: Theme.of(context).colorScheme.surfaceContainerLow,
               borderRadius: BorderRadius.circular(30),
               boxShadow: event.isPrimary
                   ? [
@@ -173,19 +163,20 @@ class _SchedulePageState extends State<SchedulePage> {
               borderRadius: BorderRadius.circular(30),
               child: Stack(
                 children: [
-                  if (event.isPrimary)
-                    Positioned(
-                      top: -60,
-                      right: -30,
-                      child: Container(
-                        width: 200,
-                        height: 200,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xFFF5F8FB),
-                        ),
+                  Positioned(
+                    top: -60,
+                    right: -30,
+                    child: Container(
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.surfaceContainerHigh,
                       ),
                     ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(24.0),
                     child: Row(
@@ -200,28 +191,45 @@ class _SchedulePageState extends State<SchedulePage> {
                                 style: GoogleFonts.plusJakartaSans(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
-                                  color: const Color(0xFF2E2E2E),
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
                                   height: 1.3,
                                 ),
                               ),
                               const SizedBox(height: 12),
                               Row(
                                 children: [
-                                  const Icon(
+                                  Icon(
                                     Icons.location_on,
-                                    color: Color(0xFF888888),
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onSurface,
                                     size: 16,
                                   ),
                                   const SizedBox(width: 6),
                                   Text(
                                     event.location,
                                     style: GoogleFonts.plusJakartaSans(
-                                      color: const Color(0xFF6E6E6E),
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onSurface,
                                       fontWeight: FontWeight.w500,
                                       fontSize: 13,
                                     ),
                                   ),
                                 ],
+                              ),
+                              Text(
+                                event.time,
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 11,
+                                  letterSpacing: 1.0,
+                                ),
                               ),
                               const SizedBox(height: 24),
                               Row(
@@ -232,17 +240,11 @@ class _SchedulePageState extends State<SchedulePage> {
                                     children: [
                                       CircleAvatar(
                                         radius: 20,
-                                        backgroundColor: Colors.grey[300],
-                                        backgroundImage:
-                                            event.speakerImage != null
-                                            ? NetworkImage(event.speakerImage!)
-                                            : null,
-                                        child: event.speakerImage == null
-                                            ? const Icon(
-                                                Icons.person,
-                                                color: Colors.grey,
-                                              )
-                                            : null,
+                                        //backgroundColor: Colors.grey[300],
+                                        child: const Icon(
+                                          Icons.person,
+                                          //color: Colors.grey,
+                                        ),
                                       ),
                                       if (event.tag != null)
                                         Positioned(
@@ -286,7 +288,9 @@ class _SchedulePageState extends State<SchedulePage> {
                                           style: GoogleFonts.plusJakartaSans(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
-                                            color: const Color(0xFF2E2E2E),
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.onSurface,
                                           ),
                                         ),
                                         const SizedBox(height: 2),
@@ -345,23 +349,23 @@ class _SchedulePageState extends State<SchedulePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(30, 20, 0, 0),
+            padding: const EdgeInsets.fromLTRB(25, 15, 0, 0),
             child: Text(
               'Event',
               style: GoogleFonts.plusJakartaSans(
-                fontWeight: FontWeight.w600,
-                fontSize: 45,
-                color: const Color.fromARGB(255, 46, 46, 46),
+                fontWeight: FontWeight.w800,
+                fontSize: 36,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
             child: Text(
               'Schedule.',
               style: GoogleFonts.plusJakartaSans(
-                fontWeight: FontWeight.w600,
-                fontSize: 45,
+                fontWeight: FontWeight.w800,
+                fontSize: 36,
                 color: const Color.fromARGB(255, 22, 67, 171),
               ),
             ),
@@ -373,7 +377,7 @@ class _SchedulePageState extends State<SchedulePage> {
               style: GoogleFonts.plusJakartaSans(
                 fontWeight: FontWeight.w600,
                 fontSize: 15,
-                color: const Color.fromARGB(255, 78, 78, 78),
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
           ),
@@ -389,7 +393,11 @@ class _SchedulePageState extends State<SchedulePage> {
                     label: Text(
                       'Day ${index + 1}',
                       style: GoogleFonts.plusJakartaSans(
-                        color: isSelected ? Colors.white : Colors.black,
+                        color: isSelected
+                            ? Theme.of(
+                                context,
+                              ).colorScheme.surfaceContainerLowest
+                            : Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
                       ),
@@ -403,7 +411,9 @@ class _SchedulePageState extends State<SchedulePage> {
                     elevation: 1,
                     selectedShadowColor: Colors.blue,
                     selectedColor: Colors.blue,
-                    backgroundColor: Colors.grey[200],
+                    backgroundColor: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                     ),
