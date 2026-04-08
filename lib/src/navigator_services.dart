@@ -109,7 +109,7 @@ class _NavigatorServicesState extends State<NavigatorServices> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.only(right: 8),
             //theme button
             child: ValueListenableBuilder<ThemeMode>(
               valueListenable: themeNotifier,

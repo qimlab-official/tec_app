@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Exhibitor {
   final String name;
@@ -123,7 +122,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                       children: [
                         TextSpan(
                           text: 'Exhibitors',
-                          style: GoogleFonts.plusJakartaSans(
+                          style: TextStyle(
                             fontWeight: FontWeight.w800,
                             fontSize: 36,
                             color: Theme.of(context).colorScheme.onSurface,
@@ -131,7 +130,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                         ),
                         TextSpan(
                           text: '.',
-                          style: GoogleFonts.plusJakartaSans(
+                          style: TextStyle(
                             fontWeight: FontWeight.w800,
                             fontSize: 40,
                             color: const Color(0xFF1643AB),
@@ -159,7 +158,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                 ),
                 hintText: 'Search booth, company, or tag...',
                 hintStyle: WidgetStatePropertyAll(
-                  GoogleFonts.plusJakartaSans(
+                  TextStyle(
                     // color: const Color(0xFF94A3B8),
                     fontWeight: FontWeight.w500,
                     fontSize: 14,
@@ -212,7 +211,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                         ),
                         side: BorderSide.none,
                         showCheckmark: false,
-                        labelStyle: GoogleFonts.plusJakartaSans(
+                        labelStyle: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 13,
                           color: isSelected
@@ -293,7 +292,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                                     children: [
                                       Text(
                                         exhibitor.name,
-                                        style: GoogleFonts.plusJakartaSans(
+                                        style: TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 18,
                                           color: Theme.of(
@@ -316,7 +315,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                                           ),
                                           child: Text(
                                             'HIRING',
-                                            style: GoogleFonts.plusJakartaSans(
+                                            style: TextStyle(
                                               fontSize: 10,
                                               fontWeight: FontWeight.w800,
                                               color: const Color(0xFF00A272),
@@ -330,7 +329,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                                   const SizedBox(height: 4),
                                   Text(
                                     exhibitor.industries.join(' • '),
-                                    style: GoogleFonts.plusJakartaSans(
+                                    style: TextStyle(
                                       fontSize: 13,
                                       color: Colors.grey[600],
                                       fontWeight: FontWeight.w500,
@@ -358,7 +357,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                                 const SizedBox(width: 5),
                                 Text(
                                   exhibitor.booth,
-                                  style: GoogleFonts.plusJakartaSans(
+                                  style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w700,
                                     color: Theme.of(
@@ -388,7 +387,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                               ),
                               child: Text(
                                 exhibitor.hasRoles ? 'View Roles' : 'Details',
-                                style: GoogleFonts.plusJakartaSans(
+                                style: TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w700,
                                 ),

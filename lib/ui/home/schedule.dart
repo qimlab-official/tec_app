@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({super.key, required this.title});
@@ -188,7 +187,7 @@ class _SchedulePageState extends State<SchedulePage> {
                             children: [
                               Text(
                                 event.title,
-                                style: GoogleFonts.plusJakartaSans(
+                                style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                   color: Theme.of(
@@ -210,7 +209,7 @@ class _SchedulePageState extends State<SchedulePage> {
                                   const SizedBox(width: 6),
                                   Text(
                                     event.location,
-                                    style: GoogleFonts.plusJakartaSans(
+                                    style: TextStyle(
                                       color: Theme.of(
                                         context,
                                       ).colorScheme.onSurface,
@@ -222,7 +221,7 @@ class _SchedulePageState extends State<SchedulePage> {
                               ),
                               Text(
                                 event.time,
-                                style: GoogleFonts.plusJakartaSans(
+                                style: TextStyle(
                                   color: Theme.of(
                                     context,
                                   ).colorScheme.onSurface,
@@ -265,13 +264,12 @@ class _SchedulePageState extends State<SchedulePage> {
                                             child: Text(
                                               event.tag!,
                                               textAlign: TextAlign.center,
-                                              style:
-                                                  GoogleFonts.plusJakartaSans(
-                                                    color: Colors.black87,
-                                                    fontWeight: FontWeight.w800,
-                                                    fontSize: 8,
-                                                    letterSpacing: 0.5,
-                                                  ),
+                                              style: TextStyle(
+                                                color: Colors.black87,
+                                                fontWeight: FontWeight.w800,
+                                                fontSize: 8,
+                                                letterSpacing: 0.5,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -285,7 +283,7 @@ class _SchedulePageState extends State<SchedulePage> {
                                       children: [
                                         Text(
                                           event.speakerName,
-                                          style: GoogleFonts.plusJakartaSans(
+                                          style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             color: Theme.of(
@@ -296,7 +294,7 @@ class _SchedulePageState extends State<SchedulePage> {
                                         const SizedBox(height: 2),
                                         Text(
                                           event.speakerRole,
-                                          style: GoogleFonts.plusJakartaSans(
+                                          style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 12,
                                             color: const Color(0xFF888888),
@@ -352,7 +350,7 @@ class _SchedulePageState extends State<SchedulePage> {
             padding: const EdgeInsets.fromLTRB(25, 15, 0, 0),
             child: Text(
               'Event',
-              style: GoogleFonts.plusJakartaSans(
+              style: TextStyle(
                 fontWeight: FontWeight.w800,
                 fontSize: 36,
                 color: Theme.of(context).colorScheme.onSurface,
@@ -363,7 +361,7 @@ class _SchedulePageState extends State<SchedulePage> {
             padding: const EdgeInsets.fromLTRB(25, 0, 0, 0),
             child: Text(
               'Schedule.',
-              style: GoogleFonts.plusJakartaSans(
+              style: TextStyle(
                 fontWeight: FontWeight.w800,
                 fontSize: 36,
                 color: const Color.fromARGB(255, 22, 67, 171),
@@ -374,7 +372,7 @@ class _SchedulePageState extends State<SchedulePage> {
             padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
             child: Text(
               'Design your career path. Connect with industry leaders in real-time sessions.',
-              style: GoogleFonts.plusJakartaSans(
+              style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 15,
                 color: Theme.of(context).colorScheme.onSurface,
@@ -392,7 +390,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   child: ChoiceChip(
                     label: Text(
                       'Day ${index + 1}',
-                      style: GoogleFonts.plusJakartaSans(
+                      style: TextStyle(
                         color: isSelected
                             ? Theme.of(
                                 context,
@@ -440,10 +438,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   return Center(
                     child: Text(
                       'No events scheduled for this day.',
-                      style: GoogleFonts.plusJakartaSans(
-                        color: Colors.grey,
-                        fontSize: 16,
-                      ),
+                      style: TextStyle(color: Colors.grey, fontSize: 16),
                     ),
                   );
                 }

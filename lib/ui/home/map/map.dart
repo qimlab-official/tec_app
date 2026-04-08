@@ -843,10 +843,10 @@ class _MapPageState extends State<MapPage> {
                 borderRadius: BorderRadius.circular(24),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF8FAFC),
+                    color: Theme.of(context).colorScheme.surfaceContainerLowest,
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: const Color(0xFFE2E8F0),
+                      color: Theme.of(context).colorScheme.surfaceContainerHigh,
                       width: 1,
                     ),
                     boxShadow: [
