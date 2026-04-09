@@ -1,24 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Exhibitor {
-  final String name;
-  final String logo;
-  final List<String> industries;
-  final String booth;
-  final bool isHiring;
-  final bool hasRoles;
-  final Color? color;
-
-  Exhibitor({
-    required this.name,
-    required this.logo,
-    required this.industries,
-    required this.booth,
-    this.isHiring = false,
-    this.hasRoles = false,
-    this.color,
-  });
-}
+import 'exhibitor_data.dart';
 
 class ExhibitorPage extends StatefulWidget {
   const ExhibitorPage({super.key, required this.title});
@@ -39,72 +21,6 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
     'Robotica',
   ];
   String selectedCategory = 'All';
-
-  final List<Exhibitor> exhibitors = [
-    Exhibitor(
-      name: 'Nexus AI',
-      logo: 'https://placehold.jp/150x150.png',
-      industries: ['Artificial Intelligence', 'Cloud Systems'],
-      booth: 'Booth A-12',
-      isHiring: true,
-      hasRoles: true,
-      color: Colors.blue[100],
-    ),
-    Exhibitor(
-      name: 'EcoStream',
-      logo: 'https://placehold.jp/150x150.png',
-      industries: ['SustainTech', 'Data Visualization'],
-      booth: 'Booth C-04',
-      isHiring: false,
-      hasRoles: false,
-      color: Colors.teal[100],
-    ),
-    Exhibitor(
-      name: 'VaultCore',
-      logo: 'https://placehold.jp/150x150.png',
-      industries: ['Fintech', 'Cybersecurity'],
-      booth: 'Booth B-21',
-      isHiring: true,
-      hasRoles: true,
-      color: Colors.purple[100],
-    ),
-    Exhibitor(
-      name: 'Kinetica',
-      logo: 'https://placehold.jp/150x150.png',
-      industries: ['Robotics', 'Automation'],
-      booth: 'Booth D-15',
-      isHiring: false,
-      hasRoles: false,
-      color: Colors.orange[100],
-    ),
-    Exhibitor(
-      name: 'HealthPixel',
-      logo: 'https://placehold.jp/150x150.png',
-      industries: ['HealthTech', 'Software Engineering'],
-      booth: 'Booth A-08',
-      isHiring: true,
-      hasRoles: true,
-      color: Colors.red[100],
-    ),
-    Exhibitor(
-      name: 'QuantumFlow',
-      logo: 'https://placehold.jp/150x150.png',
-      industries: ['Software', 'Cloud Infrastructure'],
-      booth: 'Booth E-02',
-      isHiring: true,
-      hasRoles: true,
-      color: Colors.indigo[100],
-    ),
-    Exhibitor(
-      name: 'AetherAI',
-      logo: 'https://placehold.jp/150x150.png',
-      industries: ['AI & ML', 'Deep Learning'],
-      booth: 'Booth F-11',
-      isHiring: false,
-      hasRoles: false,
-      color: Colors.lightBlue[100],
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -228,7 +144,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
             // Exhibitor List
             Expanded(
               child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
+                padding: const EdgeInsets.symmetric(horizontal: 18),
                 itemCount: exhibitors.length,
                 itemBuilder: (context, index) {
                   final exhibitor = exhibitors[index];
@@ -241,16 +157,16 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                   }
 
                   return Container(
-                    margin: const EdgeInsets.only(bottom: 20),
+                    margin: const EdgeInsets.only(bottom: 15),
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.surfaceContainerLow,
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.03),
-                          blurRadius: 20,
-                          offset: const Offset(0, 10),
+                          color: Colors.black.withValues(alpha: 0.1),
+                          blurRadius: 10,
+                          offset: const Offset(0, 0),
                         ),
                       ],
                     ),
@@ -289,15 +205,21 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        exhibitor.name,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 18,
-                                          color: Theme.of(
-                                            context,
-                                          ).colorScheme.onSurface,
+                                      Expanded(
+                                        child: Text(
+                                          exhibitor.name,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 18,
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.onSurface,
+                                          ),
                                         ),
                                       ),
                                       if (exhibitor.isHiring) ...[
@@ -370,12 +292,8 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                             ElevatedButton(
                               onPressed: () {},
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: exhibitor.hasRoles
-                                    ? const Color(0xFF0059C1)
-                                    : Colors.grey[200],
-                                foregroundColor: exhibitor.hasRoles
-                                    ? Colors.white
-                                    : Colors.black87,
+                                backgroundColor: const Color(0xFF0059C1),
+                                foregroundColor: Colors.white,
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
@@ -386,7 +304,7 @@ class _ExhibitorPageState extends State<ExhibitorPage> {
                                 ),
                               ),
                               child: Text(
-                                exhibitor.hasRoles ? 'View Roles' : 'Details',
+                                'View Details',
                                 style: TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w700,

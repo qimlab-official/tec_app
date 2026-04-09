@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
-import '../ui/home/home_nav.dart';
+import '../ui/home/exhibitor/exhibitor.dart';
+import '../ui/home/home.dart';
+import '../ui/home/map/map.dart';
+import '../ui/home/more/more.dart';
+import '../ui/home/schedule/schedule.dart';
 import '../ui/notification/notification.dart';
-import '../ui/about_us/about_us.dart';
-import '../ui/throwback/throwback.dart';
-import '../ui/career_dev_series/career.dart';
-import '../ui/faqs/faqs.dart';
 
 class NavigatorServices extends StatefulWidget {
   const NavigatorServices({super.key});
@@ -15,81 +15,20 @@ class NavigatorServices extends StatefulWidget {
 }
 
 class _NavigatorServicesState extends State<NavigatorServices> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    const HomeNavPage(),
-    const AboutUsPage(),
-    const ThrowbackPage(),
-    const CareerPage(),
-    const FaqsPage(),
+    const HomePage(title: 'Home'),
+    const MapPage(title: 'Map'),
+    const ExhibitorPage(title: 'Exhibitor'),
+    const SchedulePage(),
+    const MorePage(title: 'More'),
   ];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: Drawer(
-        child: NavigationDrawer(
-          selectedIndex: _selectedIndex,
-          indicatorShape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          onDestinationSelected: (int index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-            Navigator.pop(context);
-          },
-          children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-              child: Container(
-                color: Theme.of(context).colorScheme.surfaceContainerLowest,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(20, 20, 0, 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        'assets/image/logo/tec_logo_appbar.webp',
-                        height: 80,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+    final bool isLargeScreen = MediaQuery.of(context).size.width >= 650;
 
-            NavigationDrawerDestination(
-              icon: Icon(Icons.home_outlined),
-              selectedIcon: Icon(Icons.home_filled),
-              label: Text("Home"),
-            ),
-            NavigationDrawerDestination(
-              icon: Icon(Icons.info_outline),
-              selectedIcon: Icon(Icons.info_rounded),
-              label: Text("About Us"),
-            ),
-            NavigationDrawerDestination(
-              icon: Icon(Icons.history_outlined),
-              selectedIcon: Icon(Icons.history_rounded),
-              label: Text("Throwback"),
-            ),
-            NavigationDrawerDestination(
-              icon: Icon(Icons.upcoming),
-              selectedIcon: Icon(Icons.upcoming),
-              label: Text("Career Development Series"),
-            ),
-            NavigationDrawerDestination(
-              icon: Icon(Icons.help_outline_rounded),
-              selectedIcon: Icon(Icons.help_rounded),
-              label: Text("FAQs"),
-            ),
-          ],
-        ),
-      ),
+    return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.black,
         scrolledUnderElevation: 0,
@@ -138,18 +77,93 @@ class _NavigatorServicesState extends State<NavigatorServices> {
             ),
           ),
         ],
-        leading: IconButton(
-          onPressed: () {
-            _scaffoldKey.currentState?.openDrawer();
-          },
-          icon: const Icon(Icons.menu),
-        ),
+
         title: Image.asset(
           'assets/image/logo/tec_logo_appbar.webp',
           height: 50,
         ),
       ),
-      body: _pages[_selectedIndex],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Scan QR Code',
+        child: const Icon(Icons.qr_code_scanner),
+      ),
+      body: isLargeScreen
+          ? Row(
+              children: [
+                NavigationRail(
+                  groupAlignment: 0,
+                  selectedIndex: _selectedIndex,
+                  onDestinationSelected: (int index) {
+                    setState(() {
+                      _selectedIndex = index;
+                    });
+                  },
+                  labelType: NavigationRailLabelType.all,
+                  destinations: const <NavigationRailDestination>[
+                    NavigationRailDestination(
+                      icon: Icon(Icons.home),
+                      label: Text('Home'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.map_rounded),
+                      label: Text('Map'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.business),
+                      label: Text('Exhibitor'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.schedule_rounded),
+                      label: Text('Agenda'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.more_horiz_rounded),
+                      label: Text('More'),
+                    ),
+                  ],
+                ),
+                const VerticalDivider(thickness: 1, width: 1),
+                Expanded(child: _pages[_selectedIndex]),
+              ],
+            )
+          : _pages[_selectedIndex],
+      bottomNavigationBar: isLargeScreen
+          ? null
+          : NavigationBar(
+              selectedIndex: _selectedIndex,
+              onDestinationSelected: (int index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+              destinations: const <NavigationDestination>[
+                NavigationDestination(
+                  icon: Icon(Icons.auto_awesome_mosaic_outlined),
+                  selectedIcon: Icon(Icons.auto_awesome_mosaic_rounded),
+                  label: 'Home',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.map_outlined),
+                  selectedIcon: Icon(Icons.map_rounded),
+                  label: 'Map',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.business_outlined),
+                  selectedIcon: Icon(Icons.business_rounded),
+                  label: 'Exhibitor',
+                ),
+                NavigationDestination(
+                  selectedIcon: Icon(Icons.view_agenda_rounded),
+                  icon: Icon(Icons.view_agenda_outlined),
+                  label: 'Agenda',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.more_horiz_rounded),
+                  label: 'More',
+                ),
+              ],
+            ),
     );
   }
 }

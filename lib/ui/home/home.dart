@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Text(
-                'MAIN STAGE NEXT',
+                'UP NEXT',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 10,
@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 16),
             const Text(
-              'The Future of AI in Fintech',
+              'TEC 2026',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 28,
@@ -109,15 +109,7 @@ class _HomePageState extends State<HomePage> {
                 height: 1.2,
               ),
             ),
-            const SizedBox(height: 12),
-            Text(
-              'Keynote by Dr. Sarah Chen, CTO of Nexus Systems',
-              style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.9),
-                fontSize: 15,
-                height: 1.4,
-              ),
-            ),
+
             const SizedBox(height: 24),
             Container(
               width: double.infinity,
@@ -238,6 +230,30 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: _buildActionCard(
                   title: 'My Schedule',
+                  subtitle: '4 Saved sessions',
+                  icon: Icons.calendar_today_outlined,
+                  iconBgColor: const Color(0xFF93C5FD),
+                  iconColor: const Color(0xFF1E3A8A),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: _buildActionCard(
+                  title: 'Career Development Series',
+                  subtitle: '240+ Companies',
+                  icon: Icons.business_outlined,
+                  iconBgColor: const Color(0xFF93C5FD),
+                  iconColor: const Color(0xFF1E3A8A),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildActionCard(
+                  title: 'About TEC',
                   subtitle: '4 Saved sessions',
                   icon: Icons.calendar_today_outlined,
                   iconBgColor: const Color(0xFF93C5FD),

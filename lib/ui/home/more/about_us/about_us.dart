@@ -20,23 +20,23 @@ class _AboutUsPageState extends State<AboutUsPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('About Us'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('About Us'), centerTitle: true),
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 8.0,
+            ),
             child: LayoutBuilder(
               builder: (context, constraints) {
                 final width = constraints.maxWidth;
                 return Container(
                   height: 50,
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.primary.withOpacity(0.1),
+                    color: theme.colorScheme.primary.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(25),
                   ),
                   child: Stack(
@@ -54,7 +54,9 @@ class _AboutUsPageState extends State<AboutUsPage> {
                             borderRadius: BorderRadius.circular(25),
                             boxShadow: [
                               BoxShadow(
-                                color: theme.colorScheme.primary.withOpacity(0.3),
+                                color: theme.colorScheme.primary.withValues(
+                                  alpha: 0.3,
+                                ),
                                 blurRadius: 8,
                                 offset: const Offset(0, 4),
                               ),
@@ -127,7 +129,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                     ],
                   ),
                 );
-              }
+              },
             ),
           ),
           const SizedBox(height: 8),
@@ -139,10 +141,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   _selectedIndex = index;
                 });
               },
-              children: [
-                _buildOverviewTab(theme),
-                _buildMilestoneTab(theme),
-              ],
+              children: [_buildOverviewTab(theme), _buildMilestoneTab(theme)],
             ),
           ),
         ],
@@ -154,33 +153,39 @@ class _AboutUsPageState extends State<AboutUsPage> {
     return ListView(
       padding: const EdgeInsets.all(24.0),
       children: [
-        Icon(Icons.info_outline, size: 64, color: theme.colorScheme.primary),
-        const SizedBox(height: 24),
+        Image.asset('assets/image/logo/tec_logo_appbar.webp', height: 100),
+        const SizedBox(height: 5),
         Text(
-          'About TEC26',
+          'About TEC',
           style: theme.textTheme.headlineMedium?.copyWith(
             fontWeight: FontWeight.bold,
+            color: theme.colorScheme.onSurface,
           ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
         Text(
           'The Technology Exhibition and Conference (TEC) 2026 is the premier event for showcasing cutting-edge technological innovations and connecting industry leaders, startups, and tech enthusiasts.',
-          style: theme.textTheme.bodyLarge?.copyWith(height: 1.6),
+          style: theme.textTheme.bodyLarge?.copyWith(
+            height: 1.6,
+            color: theme.colorScheme.onSurface,
+          ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 32),
         _buildInfoCard(
           theme,
           title: 'Our Mission',
-          content: 'To foster collaboration and drive technological advancement by providing a platform for networking, learning, and discovery.',
+          content:
+              'To foster collaboration and drive technological advancement by providing a platform for networking, learning, and discovery.',
           icon: Icons.rocket_launch,
         ),
         const SizedBox(height: 16),
         _buildInfoCard(
           theme,
           title: 'Our Vision',
-          content: 'To be the catalyst for the next generation of technological breakthroughs that will shape our future.',
+          content:
+              'To be the catalyst for the next generation of technological breakthroughs that will shape our future.',
           icon: Icons.visibility,
         ),
       ],
@@ -195,6 +200,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
           'Our Journey',
           style: theme.textTheme.headlineMedium?.copyWith(
             fontWeight: FontWeight.bold,
+            color: theme.colorScheme.onSurface,
           ),
           textAlign: TextAlign.center,
         ),
@@ -203,34 +209,49 @@ class _AboutUsPageState extends State<AboutUsPage> {
           theme,
           year: '2024',
           title: 'The Beginning',
-          description: 'TEC was conceptualized and the first planning committee was formed.',
+          description:
+              'TEC was conceptualized and the first planning committee was formed.',
           isFirst: true,
         ),
         _buildMilestoneItem(
           theme,
           year: '2025',
           title: 'Growing Partnerships',
-          description: 'Secured major partnerships with leading tech companies and universities.',
+          description:
+              'Secured major partnerships with leading tech companies and universities.',
+        ),
+        _buildMilestoneItem(
+          theme,
+          year: '2025',
+          title: 'Growing Partnerships',
+          description:
+              'Secured major partnerships with leading tech companies and universities.',
         ),
         _buildMilestoneItem(
           theme,
           year: '2026',
           title: 'TEC26 Event',
-          description: 'The inaugural TEC event opens its doors to thousands of attendees globally.',
+          description:
+              'The inaugural TEC event opens its doors to thousands of attendees globally.',
           isLast: true,
         ),
       ],
     );
   }
 
-  Widget _buildInfoCard(ThemeData theme, {required String title, required String content, required IconData icon}) {
+  Widget _buildInfoCard(
+    ThemeData theme, {
+    required String title,
+    required String content,
+    required IconData icon,
+  }) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: theme.colorScheme.primaryContainer.withOpacity(0.3),
+        color: theme.colorScheme.primaryContainer.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: theme.colorScheme.outlineVariant.withOpacity(0.5),
+          color: theme.colorScheme.outlineVariant.withValues(alpha: 0.5),
         ),
       ),
       child: Column(
@@ -252,6 +273,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   title,
                   style: theme.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
+                    color: theme.colorScheme.onPrimaryContainer,
                   ),
                 ),
               ),
@@ -260,7 +282,10 @@ class _AboutUsPageState extends State<AboutUsPage> {
           const SizedBox(height: 16),
           Text(
             content,
-            style: theme.textTheme.bodyLarge?.copyWith(height: 1.5),
+            style: theme.textTheme.bodyLarge?.copyWith(
+              height: 1.5,
+              color: theme.colorScheme.onPrimaryContainer,
+            ),
           ),
         ],
       ),
@@ -284,16 +309,21 @@ class _AboutUsPageState extends State<AboutUsPage> {
               Container(
                 width: 2,
                 height: 24,
-                color: isFirst ? Colors.transparent : theme.colorScheme.primary.withOpacity(0.5),
+                color: isFirst
+                    ? Colors.transparent
+                    : theme.colorScheme.primary.withValues(alpha: 0.5),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: theme.colorScheme.primary,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: theme.colorScheme.primary.withOpacity(0.2),
+                      color: theme.colorScheme.primary.withValues(alpha: 0.2),
                       blurRadius: 4,
                       offset: const Offset(0, 2),
                     ),
@@ -310,7 +340,9 @@ class _AboutUsPageState extends State<AboutUsPage> {
               Expanded(
                 child: Container(
                   width: 2,
-                  color: isLast ? Colors.transparent : theme.colorScheme.primary.withOpacity(0.5),
+                  color: isLast
+                      ? Colors.transparent
+                      : theme.colorScheme.primary.withValues(alpha: 0.5),
                 ),
               ),
             ],
@@ -325,11 +357,13 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   color: theme.colorScheme.surface,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: theme.colorScheme.outlineVariant.withOpacity(0.5),
+                    color: theme.colorScheme.outlineVariant.withValues(
+                      alpha: 0.5,
+                    ),
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.03),
+                      color: Colors.black.withValues(alpha: 0.03),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
